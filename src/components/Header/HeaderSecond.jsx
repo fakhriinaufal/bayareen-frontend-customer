@@ -5,7 +5,7 @@ export default function HeaderSecond() {
   return (
     <div className="flex justify-between p-2 bg-light-green">
       <div className="inline-flex ml-3">
-        <img src={back} alt="" />
+        <img src={back} alt="kembali" />
       </div>
       <div className="inline-flex mr-3">
         <img src={notif} alt="notifikasi" />
