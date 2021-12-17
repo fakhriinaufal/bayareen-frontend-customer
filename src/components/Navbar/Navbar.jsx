@@ -1,7 +1,7 @@
 import React from 'react'
-import home from "./assets/Home.svg"
-import transaction from "./assets/Transaction.svg"
-import profile from "./assets/Profile.svg"
+import home from "../../assets/icon/Home.svg"
+import transaction from "../../assets/icon/Transaction.svg"
+import profile from "../../assets/icon/Profile.svg"
 import { NavLink } from 'react-router-dom'
 
 export default function Navbar() {
