@@ -3,17 +3,21 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'dark-green': {
-          DEFAULT: '#006D77',
-          'hover': '#085860'
+        "dark-green": {
+          DEFAULT: "#006D77",
+          hover: "#085860",
         },
-        'light-gray': {
-          DEFAULT: '#EDF6F9'
+        "light-green": {
+          DEFAULT: "#83C5BE",
+        },
+        "light-gray": {
+          DEFAULT: "#EDF6F9",
         },
       },
       fontFamily: {
-        main: ["Poppins"]
-      }
+        title: ["Rancho"],
+        main: ["Poppins"],
+      },
     },
   },
   plugins: [],
