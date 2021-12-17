@@ -16,6 +16,7 @@ module.exports = {
       },
       fontFamily: {
         title: ["Rancho"],
+        main: ["Poppins"],
       },
     },
   },
