@@ -15,8 +15,9 @@ module.exports = {
         },
       },
       fontFamily: {
-        main: ["Poppins"]
-      }
+        title: ["Rancho"],
+        main: ["Poppins"],
+      },
     },
   },
   plugins: [],
