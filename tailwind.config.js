@@ -18,6 +18,9 @@ module.exports = {
         title: ["Rancho"],
         main: ["Poppins"],
       },
+      boxShadow: {
+        navbar: '0px 0px 50px 0px rgba(0,0,0,0.1)'
+      }
     },
   },
   plugins: [],
