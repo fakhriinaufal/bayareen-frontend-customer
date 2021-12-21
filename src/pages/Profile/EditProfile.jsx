@@ -7,10 +7,12 @@ import Button from "../../components/Button/Button"
 export default function EditProfile() {
     return (
         <Layout head={<HeaderSecond />} nav={<Navbar />}>
-            <Input text={"Name"} containerClassName={"mt-14"} />
-            <Input text={"Phone Number"} type={"number"} />
-            <Input text={"Email"} />
-            <Button text={"Submit"} className={"mt-10"} />
+            <form action="" className="mt-14">
+                <Input text={"Name"} />
+                <Input text={"Phone Number"} type={"number"} />
+                <Input text={"Email"} />
+                <Button text={"Submit"} className={"mt-10"} />
+            </form>
         </Layout>
     )
 }
