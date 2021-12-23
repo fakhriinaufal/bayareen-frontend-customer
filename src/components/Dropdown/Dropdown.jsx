@@ -2,7 +2,7 @@ import { useState } from 'react'
 import down from "../../assets/icon/down.svg"
 import DropdownList from './DropdownList'
 
-export default function Dropdown1({ text, name, onChange, value, list, containerClassName, labelClassName, listClassName }) {
+export default function Dropdown({ text, name, onChange, value, list, containerClassName, labelClassName, listClassName }) {
     const [showList, setShowList] = useState(false)
 
     function changeHandler(data) {
@@ -19,7 +19,7 @@ export default function Dropdown1({ text, name, onChange, value, list, container
             </div>
             {showList && (
                 <ul className='rounded border transition-all'>
-                    {list.map(li => <DropdownList className={listClassName} key={li.value} data={li} onClick={changeHandler} />)}
+                    {list.map(li => <DropdownList className={listClassName} key={li.val} data={li} onClick={changeHandler} />)}
                 </ul>
             )}
         </div>
