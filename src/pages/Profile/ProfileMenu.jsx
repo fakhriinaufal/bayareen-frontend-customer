@@ -7,8 +7,11 @@ import out from "../../assets/icon/out.svg";
 import enter from "../../assets/icon/enter.svg";
 import banner from "../../assets/img/profile.svg";
 import { Link } from "react-router-dom";
+import NotLogin from "../NotLogin/NotLogin";
 
 export default function ProfileMenu({ name, onClick }) {
+  const isLogin = false;
+  if (!isLogin) return <NotLogin />;
   return (
     <Layout head={<Header />} nav={<Navbar />}>
       <div className="flex flex-col items-center text-dark-green gap-1.5">
