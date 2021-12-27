@@ -3,8 +3,11 @@ import HeaderSecond from "../../components/Header/HeaderSecond";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
+import NotLogin from "../NotLogin/NotLogin";
 
 export default function CheckoutListrik() {
+  const isLogin = false;
+  if (!isLogin) return <NotLogin />;
   const navigate = useNavigate();
   return (
     <Layout head={<HeaderSecond />}>

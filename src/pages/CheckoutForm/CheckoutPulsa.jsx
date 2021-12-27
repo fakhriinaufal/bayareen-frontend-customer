@@ -6,8 +6,11 @@ import Dropdown from "../../components/Dropdown/Dropdown";
 import { useState } from "react";
 import { mockCheckoutOption } from "../../mockdata";
 import { useNavigate } from "react-router-dom";
+import NotLogin from "../NotLogin/NotLogin";
 
 export default function CheckoutPulsa() {
+  const isLogin = false;
+  if (!isLogin) return <NotLogin />;
   const [provider, setProvider] = useState({
     val: null,
     text: "cari provider",
