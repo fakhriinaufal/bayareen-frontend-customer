@@ -48,6 +48,7 @@ export const mockCheckoutOption = [
 
 export const historyProps = [
   {
+    id: 1,
     name: "Pulsa 10.000",
     price: "Rp12.500",
     status: "Success",
@@ -55,6 +56,7 @@ export const historyProps = [
     category: "Pulsa",
   },
   {
+    id: 2,
     name: "Paket 10GB",
     price: "Rp25.500",
     status: "Pending",
