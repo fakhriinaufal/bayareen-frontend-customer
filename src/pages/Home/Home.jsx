@@ -3,30 +3,17 @@ import Header from "../../components/Header/HeaderMain";
 import Navbar from "../../components/Navbar/Navbar";
 import Category from "./Category";
 import Banner from "../../assets/img/MainBanner.png";
-import simpati from "../../assets/img/simpati.png";
-import xl from "../../assets/img/xl.png";
+
 // Import Swiper components
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 // import Swiper core and required modules
 import SwiperCore, { FreeMode } from "swiper";
+import { mockHomeNew } from "../../mockdata";
 
 SwiperCore.use([FreeMode]);
 export default function Home(props) {
-  const mock = [
-    {
-      name: "Pulsa 50.000",
-      src: simpati,
-      alt: "simpati",
-    },
-    {
-      name: "Paket 5GB",
-      src: xl,
-      alt: "xl",
-    },
-  ];
-
   return (
     <Layout head={<Header />} nav={<Navbar />}>
       <div className="flex flex-col">
@@ -46,8 +33,8 @@ export default function Home(props) {
           spaceBetween={30}
           pagination={{ clickable: true }}
         >
-          {mock.map((data) => (
-            <SwiperSlide style={{ width: "14rem" }}>
+          {mockHomeNew.map((data) => (
+            <SwiperSlide key={data.id} style={{ width: "14rem" }}>
               <div className="bg-light-gray flex rounded-lg items-center px-3 py-2 w-56">
                 <div className="inline-flex gap-2 items-center">
                   <img src={data.src} alt={data.alt} />
