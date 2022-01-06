@@ -1,0 +1,78 @@
+{
+  "categories": {
+    "message": "success",
+    "data": [
+      {
+        "id": 1,
+        "name": "Pulsa",
+        "img_url": ""
+      },
+      {
+        "id": 2,
+        "name": "Paket",
+        "img_url": ""
+      },
+      {
+        "id": 3,
+        "name": "PDAM",
+        "img_url": ""
+      },
+      {
+        "id": 4,
+        "name": "Listrik",
+        "img_url": ""
+      }
+    ]
+  },
+  "providers": {
+    "message": "success",
+    "data": [
+      {
+        "id": "1",
+        "cat_id": "1",
+        "name": "Telkomsel"
+      },
+      {
+        "id": "2",
+        "cat_id": "1",
+        "name": "By.U"
+      },
+      {
+        "id": "3",
+        "cat_id": "1",
+        "name": "Indosat"
+      },
+      {
+        "id": "4",
+        "cat_id": "1",
+        "name": "XL"
+      }
+    ]
+  },
+  "products": {
+    "message": "success",
+    "data": [
+      {
+        "id": "1",
+        "cat_id": "1",
+        "provider_id": "1",
+        "name": "Pulsa 10.000",
+        "status": true
+      },
+      {
+        "id": "2",
+        "cat_id": "1",
+        "provider_id": "2",
+        "name": "Pulsa 20.000",
+        "status": true
+      },
+      {
+        "id": "3",
+        "cat_id": "1",
+        "provider_id": "3",
+        "name": "Pulsa 50.000",
+        "status": true
+      }
+    ]
+  }
+}
