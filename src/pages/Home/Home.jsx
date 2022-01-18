@@ -3,26 +3,35 @@ import Header from "../../components/Header/HeaderMain";
 import Navbar from "../../components/Navbar/Navbar";
 import Category from "./Category";
 import Banner from "../../assets/img/MainBanner.png";
-
-// Import Swiper components
+import useGetCategories from "../../hooks/useGetCategories";
+import ReactLoading from "react-loading";
 import { Swiper, SwiperSlide } from "swiper/react";
-// Import Swiper styles
 import "swiper/css";
-// import Swiper core and required modules
 import SwiperCore, { FreeMode } from "swiper";
 import { mockHomeNew } from "../../mockdata";
 
 SwiperCore.use([FreeMode]);
-export default function Home(props) {
+export default function Home() {
+  const { categories, loading, error } = useGetCategories();
+
   return (
     <Layout head={<Header />} nav={<Navbar />}>
       <div className="flex flex-col">
         <img src={Banner} alt="banner" className="mt-16 rounded-lg h-36" />
         <div className="mt-6 mb-2 text-dark-green font-bold">Categories</div>
         <div className="bg-light-gray flex flex-wrap rounded-lg items-center p-2">
-          {props.data.map((item) => (
-            <Category key={item.id} data={item} />
-          ))}
+          {error && <p>{error.message}</p>}
+          {!loading ? (
+            categories?.map((item) => <Category key={item.val} data={item} />)
+          ) : (
+            <ReactLoading
+              type={"spokes"}
+              color={"#83C5BE"}
+              height={50}
+              width={50}
+              className="mx-auto"
+            />
+          )}
         </div>
         <div className="mt-6 mb-2 text-dark-green font-bold">New Products</div>
 

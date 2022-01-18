@@ -7,11 +7,16 @@ import out from "../../assets/icon/out.svg";
 import enter from "../../assets/icon/enter.svg";
 import banner from "../../assets/img/profile.svg";
 import { Link } from "react-router-dom";
-import NotLogin from "../NotLogin/NotLogin";
+import { useSelector } from "react-redux";
+import { useCookies } from "react-cookie";
 
-export default function ProfileMenu({ name, onClick }) {
-  const isLogin = false;
-  if (!isLogin) return <NotLogin />;
+export default function ProfileMenu({ onClick }) {
+  const name = useSelector((state) => state.user.data.name);
+  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
+  const clickHandler = () => {
+    removeCookie("token");
+    window.location.replace("http://localhost:3000");
+  };
   return (
     <Layout head={<Header />} nav={<Navbar />}>
       <div className="flex flex-col items-center text-dark-green gap-1.5">
@@ -37,7 +42,9 @@ export default function ProfileMenu({ name, onClick }) {
           onClick={onClick}
         >
           <img src={out} alt="out" className="flex-none" />
-          <div className="flex-grow ml-2">Sign Out</div>
+          <button className="flex-grow ml-2 text-left" onClick={clickHandler}>
+            Sign Out
+          </button>
           <img src={enter} alt="enter" className="flex-none" />
         </div>
         <img src={banner} alt="banner" className="mt-10" />

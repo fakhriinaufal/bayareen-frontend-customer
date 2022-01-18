@@ -6,11 +6,14 @@ import Dropdown from "../../components/Dropdown/Dropdown";
 import { useState } from "react";
 import { mockCheckoutOption } from "../../mockdata";
 import { useNavigate } from "react-router-dom";
-import NotLogin from "../NotLogin/NotLogin";
+import { useForm } from "react-hook-form";
 
 export default function CheckoutAir() {
-  const isLogin = false;
-  if (!isLogin) return <NotLogin />;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const [provider, setProvider] = useState({
     val: null,
     text: "Select",
@@ -23,7 +26,19 @@ export default function CheckoutAir() {
           Pembayaran Air PDAM
         </div>
         <form action="" className="">
-          <Input text={"Nomor Pelanggan"} type={"number"} />
+          <Input
+            name={"number"}
+            text={"Nomor Pelanggan"}
+            type={"number"}
+            register={register}
+            required
+            requiredMsg={"Number must be filled"}
+          />
+          {errors.number?.type === "required" && (
+            <span className="text-red-500 ml-1 text-sm">
+              {errors.number?.message}
+            </span>
+          )}
           <Dropdown
             text={"Wilayah"}
             name={"wilayah"}
