@@ -2,30 +2,39 @@ import Layout from "../../components/Layout/Layout";
 import HeaderSecond from "../../components/Header/HeaderSecond";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
-import Dropdown from "../../components/Dropdown/Dropdown";
-import { useState } from "react";
-import { mockCheckoutOption } from "../../mockdata";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 export default function CheckoutAir() {
+  const navigate = useNavigate();
+  const { state } = useLocation();
+  const catId = state;
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm();
-  const [provider, setProvider] = useState({
-    val: null,
-    text: "Select",
-  });
-  const navigate = useNavigate();
+
+  const submitHandler = (data, e) => {
+    e.preventDefault();
+    const newData = {
+      number: data.number,
+      catId: catId,
+    };
+    navigate("/payment-2", { state: newData });
+  };
+
+  const validateButton =
+    watch("number") === undefined || watch("number") === "";
+
   return (
     <Layout head={<HeaderSecond />}>
       <div className="flex flex-col">
         <div className="mt-16 text-2xl text-dark-green font-bold">
           Pembayaran Air PDAM
         </div>
-        <form action="" className="">
+        <form onSubmit={handleSubmit(submitHandler)} className="">
           <Input
             name={"number"}
             text={"Nomor Pelanggan"}
@@ -39,19 +48,16 @@ export default function CheckoutAir() {
               {errors.number?.message}
             </span>
           )}
-          <Dropdown
-            text={"Wilayah"}
-            name={"wilayah"}
-            list={mockCheckoutOption}
-            value={provider}
-            containerClassName={"mt-5"}
-            onChange={setProvider}
-          />
-          <Button
-            onClick={() => navigate("/payment-2")}
-            text={"Checkout"}
-            className={"mt-10"}
-          />
+          {/* {error && <p>{error.message}</p>} */}
+          {!validateButton ? (
+            <Button text={"Checkout"} className="mt-10" />
+          ) : (
+            <Button
+              text={"Checkout"}
+              className="mt-10 opacity-50"
+              disabled={true}
+            />
+          )}
         </form>
       </div>
     </Layout>
