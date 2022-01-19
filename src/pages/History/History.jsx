@@ -3,8 +3,15 @@ import { useNavigate } from "react-router-dom";
 
 export default function History(props) {
   const navigate = useNavigate();
-  const { name, created_at, status, price, category, payment_method_id } =
-    props.data;
+  const {
+    name,
+    created_at,
+    status,
+    price,
+    category,
+    payment_method_id,
+    invoice_url,
+  } = props.data;
   return (
     <button
       onClick={() =>
@@ -16,6 +23,7 @@ export default function History(props) {
             price,
             category,
             payment_method_id,
+            invoice_url,
           },
         })
       }

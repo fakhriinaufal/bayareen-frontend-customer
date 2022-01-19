@@ -11,12 +11,16 @@ export default function DetailHistory() {
   const { convertPaymentMethod, loading, error } = useGetPaymentMethods(
     state.payment_method_id
   );
+  const submitHandler = (e) => {
+    e.preventDefault();
+    window.location.replace(state.invoice_url);
+  };
   return (
     <Layout head={<Header />} nav={<Navbar />}>
       <h3 className="pt-16 text-dark-green text-2xl font-semibold">
         Detail Transaction
       </h3>
-      <form action="" className="">
+      <form onSubmit={submitHandler} className="">
         <Input value={state.name} text={"Product Name"} disabled={true} />
         <Input value={state.price} text={"Price"} disabled={true} />
         <Input value={state.status} text={"Status"} disabled={true} />
@@ -30,7 +34,8 @@ export default function DetailHistory() {
           text={"Payment Method"}
           disabled={true}
         />
-        {convertPaymentMethod.name !== "Unpaid" ? (
+        {error && <p>{error}</p>}
+        {state.status === "PENDING" ? (
           <Button text={"Click to Pay"} className="mt-10" />
         ) : (
           <Button
