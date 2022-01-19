@@ -16,6 +16,7 @@ export default function useGetTransactions(idx) {
       created_at: value.created_at,
       category: value.product.category.name,
       payment_method_id: value.payment_method_id,
+      invoice_url: value.invoice_url,
     };
   });
   return { convertData, loading, error };
