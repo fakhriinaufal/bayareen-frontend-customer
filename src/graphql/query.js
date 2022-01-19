@@ -12,6 +12,7 @@ export const getTransactions = gql`
       status
       created_at
       payment_method_id
+      invoice_url
       product {
         name
         price
