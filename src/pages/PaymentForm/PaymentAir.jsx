@@ -20,6 +20,11 @@ export default function PaymentAir() {
   } = useGetProductByCatId(state.catId);
   const { createTransaction, loading, error, url } = useCreateTransaction();
 
+  const displayPrice = state.price.toLocaleString("id-ID", {
+    style: "currency",
+    currency: "IDR",
+  });
+
   const submitHandler = (e) => {
     e.preventDefault();
     const object = {
@@ -39,7 +44,7 @@ export default function PaymentAir() {
       <h3 className=" text-dark-green text-2xl font-semibold">Payment</h3>
       <form onSubmit={submitHandler}>
         <Input value={state.number} text={"Nomor PDAM"} disabled={true} />
-        <Input value={state.price} text={"Total Tagihan"} disabled={true} />
+        <Input value={displayPrice} text={"Total Tagihan"} disabled={true} />
         {!loadingProduct && !loading ? (
           <Button text={"Pay"} className={"mt-10"} />
         ) : (

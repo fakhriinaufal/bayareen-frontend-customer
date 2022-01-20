@@ -14,6 +14,11 @@ export default function PaymentPulsa() {
   const userId = useSelector((state) => state.user.data.id);
   const { createTransaction, loading, error, url } = useCreateTransaction();
 
+  const displayPrice = state.nominal.price.toLocaleString("id-ID", {
+    style: "currency",
+    currency: "IDR",
+  });
+
   const submitHandler = (e) => {
     e.preventDefault();
     const object = {
@@ -35,7 +40,7 @@ export default function PaymentPulsa() {
         <Input value={state.provider.text} text={"Provider"} disabled={true} />
         <Input value={state.nominal.text} text={"Nominal"} disabled={true} />
         <Input
-          value={state.nominal.price}
+          value={displayPrice}
           text={"Total Price"}
           disabled={true}
         />
