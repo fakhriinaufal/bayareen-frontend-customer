@@ -24,7 +24,10 @@ export default function useGetProviders(idx) {
         setProviders(convertProviders);
         setLoading(false);
       })
-      .catch((err) => setError(err));
+      .catch((err) => {
+        setLoading(false);
+        setError(err);
+      });
   }, [idx]);
 
   return { providers, loading, error };

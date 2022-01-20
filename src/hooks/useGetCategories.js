@@ -19,7 +19,10 @@ export default function useGetCategories() {
         setCategories(convertCategories);
         setLoading(false);
       })
-      .catch((err) => setError(err));
+      .catch((err) => {
+        setLoading(false);
+        setError(err);
+      });
   }, []);
 
   return { categories, loading, error };

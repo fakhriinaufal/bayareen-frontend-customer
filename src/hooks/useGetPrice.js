@@ -13,7 +13,10 @@ export default function useGetPrice() {
         setPrice(res.data.data.price);
         setLoading(false);
       })
-      .catch((err) => setError(err));
+      .catch((err) => {
+        setLoading(false);
+        setError(err);
+      });
   }, []);
 
   return { price, loading, error };
