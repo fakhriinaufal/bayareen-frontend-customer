@@ -4,6 +4,7 @@ import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import useGetPrice from "../../hooks/useGetPrice";
 
 export default function CheckoutAir() {
   const navigate = useNavigate();
@@ -15,12 +16,14 @@ export default function CheckoutAir() {
     watch,
     formState: { errors },
   } = useForm();
+  const { price, loading, error } = useGetPrice();
 
   const submitHandler = (data, e) => {
     e.preventDefault();
     const newData = {
       number: data.number,
       catId: catId,
+      price: price,
     };
     navigate("/payment-2", { state: newData });
   };
@@ -48,8 +51,8 @@ export default function CheckoutAir() {
               {errors.number?.message}
             </span>
           )}
-          {/* {error && <p>{error.message}</p>} */}
-          {!validateButton ? (
+          {error && <p>{error.message}</p>}
+          {!validateButton && !loading ? (
             <Button text={"Checkout"} className="mt-10" />
           ) : (
             <Button
