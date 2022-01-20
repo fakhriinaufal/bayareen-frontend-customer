@@ -4,12 +4,23 @@ import Layout from "../../components/Layout/Layout";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import { useState } from "react";
+import useUpdatePassword from "../../hooks/useUpdatePassword";
+import { useSelector } from "react-redux";
+import ReactLoading from "react-loading";
 
 export default function ChangePassword() {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+
+  const userId = useSelector((state) => state.user.data.id);
+
+  const {
+    updatePassword,
+    loading: loadingUpdate,
+    error: errorUpdate,
+  } = useUpdatePassword();
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -21,6 +32,14 @@ export default function ChangePassword() {
       setError("Password doesn't match");
       return;
     }
+    setError("");
+    updatePassword(
+      {
+        old_password: oldPassword,
+        new_password: newPassword,
+      },
+      userId
+    );
   };
 
   const onChange = (e) => {
@@ -64,7 +83,18 @@ export default function ChangePassword() {
           containerClassName={"mb-4"}
         />
         {error && <p className="text-sm text-red-500">{error}</p>}
-        <Button text={"Submit"} className={"mt-5"} />
+        {errorUpdate && <p className="text-sm text-red-500">{errorUpdate.message}</p>}
+        {!loadingUpdate ? (
+          <Button text={"Submit"} className="mt-5" />
+        ) : (
+          <ReactLoading
+            type={"spokes"}
+            color={"#83C5BE"}
+            height={50}
+            width={50}
+            className="mx-auto mt-10"
+          />
+        )}
       </form>
     </Layout>
   );

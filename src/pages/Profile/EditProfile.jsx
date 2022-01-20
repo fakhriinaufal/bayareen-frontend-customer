@@ -5,6 +5,8 @@ import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import useUpdateProfile from "../../hooks/useUpdateProfile";
+import ReactLoading from "react-loading";
 
 export default function EditProfile() {
   const data = useSelector((state) => state.user.data);
@@ -13,6 +15,12 @@ export default function EditProfile() {
   const [phone, setPhone] = useState(data.phone);
   const [email, setEmail] = useState(data.email);
   const [error, setError] = useState("");
+
+  const {
+    updateProfile,
+    loading: loadingUpdate,
+    error: errorUpdate,
+  } = useUpdateProfile();
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -24,6 +32,15 @@ export default function EditProfile() {
       setError("Required field must be filled");
       return;
     }
+    setError("");
+    updateProfile(
+      {
+        name: name,
+        email: email,
+        phone_number: phone,
+      },
+      data.id
+    );
   };
 
   const changeHandler = (e) => {
@@ -68,7 +85,20 @@ export default function EditProfile() {
           containerClassName={"mb-4"}
         />
         {error && <p className="text-sm text-red-500">{error}</p>}
-        <Button text={"Submit"} className={"mt-5"} />
+        {errorUpdate && (
+          <p className="text-sm text-red-500">{errorUpdate.message}</p>
+        )}
+        {!loadingUpdate ? (
+          <Button text={"Submit"} className="mt-5" />
+        ) : (
+          <ReactLoading
+            type={"spokes"}
+            color={"#83C5BE"}
+            height={50}
+            width={50}
+            className="mx-auto mt-10"
+          />
+        )}
       </form>
     </Layout>
   );
