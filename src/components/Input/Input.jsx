@@ -22,10 +22,10 @@ export default function Input({
       >
         {text}
       </label>
-
       {register ? (
         <input
           id={name}
+          name={name}
           type={type || "text"}
           value={value}
           onChange={onChange}
@@ -36,6 +36,7 @@ export default function Input({
       ) : (
         <input
           id={name}
+          name={name}
           type={type || "text"}
           value={value}
           onChange={onChange}
