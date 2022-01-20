@@ -14,7 +14,8 @@ import CheckoutListrik from "./pages/CheckoutForm/CheckoutListrik";
 import CheckoutAir from "./pages/CheckoutForm/CheckoutAir";
 import DetailHistory from "./pages/History/DetailHistory";
 import Payment1 from "./pages/PaymentForm/PaymentPulsa";
-import Payment2 from "./pages/PaymentForm/PaymentListrik";
+import Payment2 from "./pages/PaymentForm/PaymentAir";
+import Payment3 from "./pages/PaymentForm/PaymentListrik"
 import NotLogin from "./pages/NotLogin/NotLogin";
 import PrivateRoute from "./components/privateRoute/PrivateRoute";
 import PublicRoute from "./components/privateRoute/PublicRoute";
@@ -112,6 +113,9 @@ function App() {
         </Route>
         <Route path="/payment-2" element={<PrivateRoute />}>
           <Route path="/payment-2" element={<Payment2 />} />
+        </Route>
+        <Route path="/payment-3" element={<PrivateRoute />}>
+          <Route path="/payment-3" element={<Payment3 />} />
         </Route>
         <Route path="/not-login" element={<NotLogin />} />
         <Route path="*" element={<NotFound />} />
