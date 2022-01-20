@@ -9,7 +9,7 @@ import useCreateTransaction from "../../hooks/useCreateTransaction";
 import useGetProductByCatId from "../../hooks/useGetProductByCatId";
 import ReactLoading from "react-loading";
 
-export default function PaymentListrik() {
+export default function PaymentAir() {
   const { state } = useLocation();
   const userId = useSelector((state) => state.user.data.id);
 
@@ -38,11 +38,7 @@ export default function PaymentListrik() {
       <div className="pt-16"></div>
       <h3 className=" text-dark-green text-2xl font-semibold">Payment</h3>
       <form onSubmit={submitHandler}>
-        <Input
-          value={state.number}
-          text={"Nomor Meter PLN"}
-          disabled={true}
-        />
+        <Input value={state.number} text={"Nomor PDAM"} disabled={true} />
         <Input value={state.price} text={"Total Tagihan"} disabled={true} />
         {!loadingProduct && !loading ? (
           <Button text={"Pay"} className={"mt-10"} />
