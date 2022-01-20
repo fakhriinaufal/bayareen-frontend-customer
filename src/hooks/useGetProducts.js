@@ -25,7 +25,10 @@ export default function useGetProducts(idx) {
         setProducts(convertProduct);
         setLoading(false);
       })
-      .catch((err) => setError(err));
+      .catch((err) => {
+        setLoading(false);
+        setError(err);
+      });
   }, [idx]);
 
   return { products, loading, error };

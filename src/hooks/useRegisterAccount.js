@@ -16,9 +16,9 @@ export default function useRegisterAccount() {
         setLoading(false);
         navigate("/login");
       })
-      .catch((error) => {
+      .catch((err) => {
         setLoading(false);
-        setError(error);
+        setError(err);
       });
   };
   return { registerAccount, loading, error };

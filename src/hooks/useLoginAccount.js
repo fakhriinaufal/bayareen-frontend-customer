@@ -29,9 +29,9 @@ export default function useRegisterAccount() {
         setCookie("token", res.data.data.token, { path: "/"});
         setLoading(false);
       })
-      .catch((error) => {
+      .catch((err) => {
         setLoading(false);
-        setError(error);
+        setError(err);
       });
   };
   return { loginAccount, loading, error };

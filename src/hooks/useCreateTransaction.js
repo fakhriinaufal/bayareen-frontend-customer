@@ -14,9 +14,9 @@ export default function useCreateTransaction() {
         setUrl(res.data.data.invoice_url);
         setLoading(false);
       })
-      .catch((error) => {
+      .catch((err) => {
         setLoading(false);
-        setError(error);
+        setError(err);
       });
   };
   return { createTransaction, loading, error, url };

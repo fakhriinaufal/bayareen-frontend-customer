@@ -11,7 +11,7 @@ export default function useGetTransactions(idx) {
     return {
       id: value.id,
       name: value.product.name,
-      price: value.product.price,
+      price: value.price,
       status: value.status,
       created_at: value.created_at,
       category: value.product.category.name,
