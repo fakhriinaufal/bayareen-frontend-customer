@@ -14,9 +14,9 @@ export default function History(props) {
   } = props.data;
 
   let color;
-  if (status === "PENDING") {
+  if (status.toUpperCase() === "PENDING") {
     color = "font-semibold text-blue-500";
-  } else if (status === "EXPIRED") {
+  } else if (status.toUpperCase() === "EXPIRED") {
     color = "font-semibold text-red-500";
   } else {
     color = "font-semibold text-dark-green";
