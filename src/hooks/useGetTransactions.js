@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { getTransactions } from "../graphql/query";
+import moment from "moment";
 
 export default function useGetTransactions(idx) {
   const { data, loading, error } = useQuery(getTransactions, {
@@ -19,5 +20,14 @@ export default function useGetTransactions(idx) {
       invoice_url: value.invoice_url,
     };
   });
+  if (!loading) {
+    let dateObj;
+    let momentObj;
+    for (let i = 0; i < convertData.length; i++) {
+      dateObj = new Date(convertData[i].created_at);
+      momentObj = moment(dateObj);
+      convertData[i].created_at = momentObj.format("lll");
+    }
+  }
   return { convertData, loading, error };
 }

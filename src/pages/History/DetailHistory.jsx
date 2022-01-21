@@ -22,7 +22,7 @@ export default function DetailHistory() {
       </h3>
       <form onSubmit={submitHandler} className="">
         <Input value={state.name} text={"Product Name"} disabled={true} />
-        <Input value={state.price} text={"Price"} disabled={true} />
+        <Input value={state.displayPrice} text={"Price"} disabled={true} />
         <Input value={state.status} text={"Status"} disabled={true} />
         <Input
           value={state.created_at}

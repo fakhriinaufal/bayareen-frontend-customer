@@ -12,6 +12,21 @@ export default function History(props) {
     payment_method_id,
     invoice_url,
   } = props.data;
+
+  let color;
+  if (status.toUpperCase() === "PENDING") {
+    color = "font-semibold text-blue-500";
+  } else if (status.toUpperCase() === "EXPIRED") {
+    color = "font-semibold text-red-500";
+  } else {
+    color = "font-semibold text-dark-green";
+  }
+
+  const displayPrice = price.toLocaleString("id-ID", {
+    style: "currency",
+    currency: "IDR",
+  });
+
   return (
     <button
       onClick={() =>
@@ -20,24 +35,24 @@ export default function History(props) {
             name,
             created_at,
             status,
-            price,
+            displayPrice,
             category,
             payment_method_id,
             invoice_url,
           },
         })
       }
-      className="flex bg-light-gray text-dark-green text-sm rounded-lg px-4 py-2 w-[23rem] items-center text-left"
+      className="flex bg-light-gray text-gray-700 text-sm rounded-lg px-4 py-2 w-[23rem] items-center text-left"
     >
       <div className="flex-none w-12">
         <Icon category={category} />
       </div>
       <div className="grow pr-3">
         <div className="font-semibold">{name}</div>
-        <div className="">{created_at}</div>
-        <div className="font-semibold">{status}</div>
+        <div className="font-light text-gray-600">{created_at}</div>
+        <div className={color}>{status}</div>
       </div>
-      <div className="font-semibold flex-non">Rp.{price}</div>
+      <div className="font-semibold flex-non">{displayPrice}</div>
     </button>
   );
 }
