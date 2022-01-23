@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 export default function useGetCategories() {
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
   const [categories, setCategories] = useState();
 
   useEffect(() => {
@@ -21,8 +21,9 @@ export default function useGetCategories() {
       })
       .catch((err) => {
         setLoading(false);
-        setError(err);
+        setError(err.response.data);
       });
+    setError("");
   }, []);
 
   return { categories, loading, error };

@@ -3,7 +3,7 @@ import { useState } from "react";
 
 export default function useCreateTransaction() {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
   const [url, setUrl] = useState("");
 
   const createTransaction = (object) => {
@@ -16,8 +16,9 @@ export default function useCreateTransaction() {
       })
       .catch((err) => {
         setLoading(false);
-        setError(err);
+        setError(err.response.data);
       });
+    setError("");
   };
   return { createTransaction, loading, error, url };
 }

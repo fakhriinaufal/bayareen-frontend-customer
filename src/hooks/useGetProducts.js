@@ -27,8 +27,9 @@ export default function useGetProducts(idx) {
       })
       .catch((err) => {
         setLoading(false);
-        setError(err);
+        setError(err.response.data);
       });
+    setError("");
   }, [idx]);
 
   return { products, loading, error };

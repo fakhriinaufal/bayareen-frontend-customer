@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 export default function useGetProviders(idx) {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
   const [providers, setProviders] = useState([]);
 
   let url = `http://localhost:8080/providers?catId=${idx}`;
@@ -26,8 +26,9 @@ export default function useGetProviders(idx) {
       })
       .catch((err) => {
         setLoading(false);
-        setError(err);
+        setError(err.response.data);
       });
+    setError("");
   }, [idx]);
 
   return { providers, loading, error };

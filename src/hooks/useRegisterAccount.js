@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function useRegisterAccount() {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const registerAccount = (object) => {
@@ -18,8 +18,9 @@ export default function useRegisterAccount() {
       })
       .catch((err) => {
         setLoading(false);
-        setError(err);
+        setError(err.response.data);
       });
+    setError("");
   };
   return { registerAccount, loading, error };
 }

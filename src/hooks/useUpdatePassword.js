@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function useUpdatePassword() {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const updatePassword = (object, idx) => {
@@ -15,10 +15,11 @@ export default function useUpdatePassword() {
         setLoading(false);
         navigate("/profile");
       })
-      .catch((error) => {
+      .catch((err) => {
         setLoading(false);
-        setError(error);
+        setError(err.response.data);
       });
+    setError("");
   };
   return { updatePassword, loading, error };
 }

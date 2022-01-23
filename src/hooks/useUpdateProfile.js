@@ -7,7 +7,7 @@ import { useCookies } from "react-cookie";
 
 export default function () {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [cookies, setCookies] = useCookies(["token"]);
@@ -29,10 +29,11 @@ export default function () {
         setLoading(false);
         navigate("/profile");
       })
-      .catch((error) => {
+      .catch((err) => {
         setLoading(false);
-        setError(error);
+        setError(err.response.data);
       });
+    setError("");
   };
   return { updateProfile, loading, error };
 }

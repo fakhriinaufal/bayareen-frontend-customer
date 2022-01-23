@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 export default function useGetPrice() {
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
   const [price, setPrice] = useState();
 
   useEffect(() => {
@@ -15,8 +15,9 @@ export default function useGetPrice() {
       })
       .catch((err) => {
         setLoading(false);
-        setError(err);
+        setError(err.response.data);
       });
+      setError("");
   }, []);
 
   return { price, loading, error };
