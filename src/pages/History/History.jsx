@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 export default function History(props) {
   const navigate = useNavigate();
   const {
+    id,
     name,
     created_at,
     status,
@@ -30,7 +31,7 @@ export default function History(props) {
   return (
     <button
       onClick={() =>
-        navigate("/transaction-detail", {
+        navigate(`/transaction/${id}`, {
           state: {
             name,
             created_at,

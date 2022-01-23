@@ -34,7 +34,7 @@ export default function DetailHistory() {
           text={"Payment Method"}
           disabled={true}
         />
-        {error && <p>{error}</p>}
+        {error && <p className="text-red-500 ml-1 text-sm">{error.message}</p>}
         {state.status === "PENDING" ? (
           <Button text={"Click to Pay"} className="mt-10" />
         ) : (
