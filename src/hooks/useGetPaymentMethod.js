@@ -21,7 +21,6 @@ export default function useGetPaymentMethod(idx) {
     id: data?.payment_methods_by_pk.id,
     name: data?.payment_methods_by_pk.payment_channel,
   };
-  console.log(data, "data");
-  console.log();
+  
   return { convertPaymentMethod, loading, error };
 }
