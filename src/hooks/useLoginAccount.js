@@ -23,7 +23,6 @@ export default function useRegisterAccount() {
             name: res.data.data.name,
             phone: res.data.data.phone_number,
             email: res.data.data.email,
-            token: res.data.data.token,
           })
         );
         setCookie("token", res.data.data.token, { path: "/" });

@@ -46,7 +46,6 @@ function App() {
               name: res.data.data.name,
               email: res.data.data.email,
               phone: res.data.data.phone,
-              token: cookies.token,
               isLogin: true,
             })
           );

@@ -8,7 +8,6 @@ const userSlice = createSlice({
       name: "",
       phone: "",
       email: "",
-      token: "",
       isLogin: false,
     },
   },
