@@ -26,7 +26,6 @@ export default function CheckoutPulsa() {
   const [nominal, setNominal] = useState({
     val: null,
     text: "100xxxx",
-    price: null,
   });
 
   const {
