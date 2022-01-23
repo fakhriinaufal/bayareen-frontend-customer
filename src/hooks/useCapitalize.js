@@ -1,3 +1,6 @@
 export default function useCapitalize(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
+  if (string !== undefined) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+  return;
 }
