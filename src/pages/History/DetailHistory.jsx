@@ -5,6 +5,7 @@ import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import { useLocation } from "react-router-dom";
 import useGetPaymentMethods from "../../hooks/useGetPaymentMethod";
+import useCapitalize from "../../hooks/useCapitalize";
 
 export default function DetailHistory() {
   const { state } = useLocation();
@@ -34,7 +35,11 @@ export default function DetailHistory() {
           text={"Payment Method"}
           disabled={true}
         />
-        {error && <p className="text-red-500 ml-1 text-sm">{error.message}</p>}
+        {error && (
+          <p className="text-red-500 ml-1 text-sm">
+            {useCapitalize(error.message)}
+          </p>
+        )}
         {state.status === "PENDING" ? (
           <Button text={"Click to Pay"} className="mt-10" />
         ) : (

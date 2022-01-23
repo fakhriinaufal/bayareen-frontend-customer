@@ -7,6 +7,7 @@ import { useLocation } from "react-router-dom";
 import useCreateTransaction from "../../hooks/useCreateTransaction";
 import { useSelector } from "react-redux";
 import ReactLoading from "react-loading";
+import useCapitalize from "../../hooks/useCapitalize";
 
 export default function PaymentPulsa() {
   const { state } = useLocation();
@@ -40,7 +41,11 @@ export default function PaymentPulsa() {
         <Input value={state.provider.text} text={"Provider"} disabled={true} />
         <Input value={state.nominal.text} text={"Nominal"} disabled={true} />
         <Input value={displayPrice} text={"Total Price"} disabled={true} />
-        {error && <p className="text-red-500 ml-1 text-sm">{error.message}</p>}
+        {error && (
+          <p className="text-red-500 ml-1 text-sm">
+            {useCapitalize(error.message)}
+          </p>
+        )}
         {!loading ? (
           <Button text={"Pay"} className={"mt-10"} />
         ) : (

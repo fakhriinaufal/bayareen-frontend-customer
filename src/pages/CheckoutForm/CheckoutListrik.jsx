@@ -5,6 +5,7 @@ import Button from "../../components/Button/Button";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import useGetPrice from "../../hooks/useGetPrice";
+import useCapitalize from "../../hooks/useCapitalize";
 
 export default function CheckoutListrik() {
   const navigate = useNavigate();
@@ -51,7 +52,9 @@ export default function CheckoutListrik() {
             </span>
           )}
           {error && (
-            <p className="text-red-500 ml-1 text-sm">{error.message}</p>
+            <p className="text-red-500 ml-1 text-sm">
+              {useCapitalize(error.message)}
+            </p>
           )}
           {!validateButton && !loading ? (
             <Button text={"Checkout"} className="mt-10" />

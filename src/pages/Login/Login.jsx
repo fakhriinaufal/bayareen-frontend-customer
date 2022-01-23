@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import useLoginAccount from "../../hooks/useLoginAccount";
 import { useSelector } from "react-redux";
 import ReactLoading from "react-loading";
+import useCapitalize from "../../hooks/useCapitalize";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -62,7 +63,11 @@ export default function Login() {
             {errors.password?.message}
           </span>
         )}
-        {error && <p className="text-red-500 ml-1 text-sm">{error.message}</p>}
+        {error && (
+          <p className="text-red-500 ml-1 text-sm">
+            {useCapitalize(error.message)}
+          </p>
+        )}
         {!loading ? (
           <Button text={"Login"} className="mt-10" />
         ) : (

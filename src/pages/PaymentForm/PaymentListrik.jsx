@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import useCreateTransaction from "../../hooks/useCreateTransaction";
 import useGetProductByCatId from "../../hooks/useGetProductByCatId";
 import ReactLoading from "react-loading";
+import useCapitalize from "../../hooks/useCapitalize";
 
 export default function PaymentListrik() {
   const { state } = useLocation();
@@ -47,9 +48,15 @@ export default function PaymentListrik() {
         <Input value={state.number} text={"Nomor Meter PLN"} disabled={true} />
         <Input value={displayPrice} text={"Total Tagihan"} disabled={true} />
         {errorProduct && (
-          <p className="text-red-500 ml-1 text-sm">{errorProduct.message}</p>
+          <p className="text-red-500 ml-1 text-sm">
+            {useCapitalize(errorProduct.message)}
+          </p>
         )}
-        {error && <p className="text-red-500 ml-1 text-sm">{error.message}</p>}
+        {error && (
+          <p className="text-red-500 ml-1 text-sm">
+            {useCapitalize(error.message)}
+          </p>
+        )}
         {!loadingProduct && !loading ? (
           <Button text={"Pay"} className={"mt-10"} />
         ) : (

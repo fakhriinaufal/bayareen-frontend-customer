@@ -6,13 +6,14 @@ import HistoryEmpty from "./HistoryEmpty";
 import useGetTransactions from "../../hooks/useGetTransactions";
 import { useSelector } from "react-redux";
 import ReactLoading from "react-loading";
+import useCapitalize from "../../hooks/useCapitalize";
 
 export default function ListHistory() {
   const userId = useSelector((state) => state.user.data.id);
   const { convertData, loading, error } = useGetTransactions(userId);
 
   if (error) {
-    return <p className="text-red-500">{error.message} </p>;
+    return <p className="text-red-500">{useCapitalize(error.message)} </p>;
   }
   if (!loading && convertData.length === 0) {
     return <HistoryEmpty />;

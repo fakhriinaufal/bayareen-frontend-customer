@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import useGetProvider from "../../hooks/useGetProviders";
 import useGetProducts from "../../hooks/useGetProducts";
 import { useLocation } from "react-router-dom";
+import useCapitalize from "../../hooks/useCapitalize";
 
 export default function CheckoutPaket() {
   const navigate = useNavigate();
@@ -84,7 +85,9 @@ export default function CheckoutPaket() {
             onChange={setNominal}
           />
           {error && (
-            <p className="text-red-500 ml-1 text-sm">{error.message}</p>
+            <p className="text-red-500 ml-1 text-sm">
+              {useCapitalize(error.message)}
+            </p>
           )}
           {!loadingProv && !loadingProducts && nominal.val !== null ? (
             <Button text={"Checkout"} className="mt-10" />
