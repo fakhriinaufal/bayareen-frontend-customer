@@ -10,6 +10,5 @@ export default function useGetProductByCatId(idx) {
   const product = {
     id: data?.products[0].id,
   };
-  console.log(product, "product");
   return { product, loading, error };
 }
