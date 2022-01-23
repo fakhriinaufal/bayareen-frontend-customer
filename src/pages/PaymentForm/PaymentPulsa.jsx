@@ -39,11 +39,8 @@ export default function PaymentPulsa() {
         <Input value={state.no} text={"Nomor"} disabled={true} />
         <Input value={state.provider.text} text={"Provider"} disabled={true} />
         <Input value={state.nominal.text} text={"Nominal"} disabled={true} />
-        <Input
-          value={displayPrice}
-          text={"Total Price"}
-          disabled={true}
-        />
+        <Input value={displayPrice} text={"Total Price"} disabled={true} />
+        {error && <p className="text-red-500 ml-1 text-sm">{error.message}</p>}
         {!loading ? (
           <Button text={"Pay"} className={"mt-10"} />
         ) : (
@@ -55,7 +52,6 @@ export default function PaymentPulsa() {
             className="mx-auto mt-10"
           />
         )}
-        {error && <p>{error.message}</p>}
       </form>
     </Layout>
   );

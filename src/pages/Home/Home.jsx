@@ -14,13 +14,16 @@ SwiperCore.use([FreeMode]);
 export default function Home() {
   const { categories, loading, error } = useGetCategories();
 
+  if (error) {
+    return <p className="text-red-500">{error.message}</p>;
+  }
+
   return (
     <Layout head={<Header />} nav={<Navbar />}>
       <div className="flex flex-col">
         <img src={Banner} alt="banner" className="mt-16 rounded-lg h-36" />
         <div className="mt-6 mb-2 text-dark-green font-bold">Categories</div>
         <div className="bg-light-gray flex flex-wrap rounded-lg items-center p-2">
-          {error && <p>{error.message}</p>}
           {!loading ? (
             categories?.map((item) => <Category key={item.val} data={item} />)
           ) : (

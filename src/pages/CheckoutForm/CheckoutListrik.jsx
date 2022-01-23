@@ -50,7 +50,9 @@ export default function CheckoutListrik() {
               {errors.number?.message}
             </span>
           )}
-          {error && <p>{error.message}</p>}
+          {error && (
+            <p className="text-red-500 ml-1 text-sm">{error.message}</p>
+          )}
           {!validateButton && !loading ? (
             <Button text={"Checkout"} className="mt-10" />
           ) : (

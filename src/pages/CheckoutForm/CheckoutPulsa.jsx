@@ -87,7 +87,9 @@ export default function CheckoutPulsa() {
             containerClassName={"mt-5"}
             onChange={setNominal}
           />
-          {error && <p>{error.message}</p>}
+          {error && (
+            <p className="text-red-500 ml-1 text-sm">{error.message}</p>
+          )}
           {!loadingProv && !loadingProducts && nominal.val !== null ? (
             <Button text={"Checkout"} className="mt-10" />
           ) : (

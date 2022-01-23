@@ -45,6 +45,10 @@ export default function PaymentAir() {
       <form onSubmit={submitHandler}>
         <Input value={state.number} text={"Nomor PDAM"} disabled={true} />
         <Input value={displayPrice} text={"Total Tagihan"} disabled={true} />
+        {errorProduct && (
+          <p className="text-red-500 ml-1 text-sm">{errorProduct.message}</p>
+        )}
+        {error && <p className="text-red-500 ml-1 text-sm">{error.message}</p>}
         {!loadingProduct && !loading ? (
           <Button text={"Pay"} className={"mt-10"} />
         ) : (
@@ -56,8 +60,6 @@ export default function PaymentAir() {
             className="mx-auto mt-10"
           />
         )}
-        {error && <p>{error.message}</p>}
-        {errorProduct && <p>{error}</p>}
       </form>
     </Layout>
   );

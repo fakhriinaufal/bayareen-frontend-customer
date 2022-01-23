@@ -62,7 +62,7 @@ export default function Login() {
             {errors.password?.message}
           </span>
         )}
-        {error && <p>{error.message}</p>}
+        {error && <p className="text-red-500 ml-1 text-sm">{error.message}</p>}
         {!loading ? (
           <Button text={"Login"} className="mt-10" />
         ) : (

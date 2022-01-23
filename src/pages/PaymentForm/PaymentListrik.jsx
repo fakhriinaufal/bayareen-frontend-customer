@@ -46,6 +46,10 @@ export default function PaymentListrik() {
       <form onSubmit={submitHandler}>
         <Input value={state.number} text={"Nomor Meter PLN"} disabled={true} />
         <Input value={displayPrice} text={"Total Tagihan"} disabled={true} />
+        {errorProduct && (
+          <p className="text-red-500 ml-1 text-sm">{errorProduct.message}</p>
+        )}
+        {error && <p className="text-red-500 ml-1 text-sm">{error.message}</p>}
         {!loadingProduct && !loading ? (
           <Button text={"Pay"} className={"mt-10"} />
         ) : (
@@ -57,8 +61,6 @@ export default function PaymentListrik() {
             className="mx-auto mt-10"
           />
         )}
-        {error && <p>{error.message}</p>}
-        {errorProduct && <p>{error}</p>}
       </form>
     </Layout>
   );
