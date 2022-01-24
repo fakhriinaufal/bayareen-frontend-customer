@@ -3,7 +3,7 @@ import Header from "../../components/Header/HeaderSecond";
 import Navbar from "../../components/Navbar/Navbar";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
-import { useLocation } from "react-router-dom";
+import { useLocation, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import useCreateTransaction from "../../hooks/useCreateTransaction";
 import useGetProductByCatId from "../../hooks/useGetProductByCatId";
@@ -12,6 +12,11 @@ import useCapitalize from "../../hooks/useCapitalize";
 
 export default function PaymentListrik() {
   const { state } = useLocation();
+
+  if (state === null || state === undefined || state === "") {
+    return <Navigate to="/" />;
+  }
+
   const userId = useSelector((state) => state.user.data.id);
 
   const {
