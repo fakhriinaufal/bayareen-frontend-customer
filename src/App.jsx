@@ -45,7 +45,7 @@ function App() {
               id: res.data.data.id,
               name: res.data.data.name,
               email: res.data.data.email,
-              phone: res.data.data.phone,
+              phone: res.data.data.phone_number,
               isLogin: true,
             })
           );
