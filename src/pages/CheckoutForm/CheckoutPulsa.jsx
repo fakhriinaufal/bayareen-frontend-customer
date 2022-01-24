@@ -8,11 +8,11 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import useGetProvider from "../../hooks/useGetProviders";
 import useGetProducts from "../../hooks/useGetProducts";
-import { useLocation } from "react-router-dom";
+import useCapitalize from "../../hooks/useCapitalize";
+import useGetCategoriesByName from "../../hooks/useGetCategoriesByName";
 
 export default function CheckoutPulsa() {
   const navigate = useNavigate();
-  const { state } = useLocation();
   const {
     register,
     handleSubmit,
@@ -26,14 +26,21 @@ export default function CheckoutPulsa() {
   const [nominal, setNominal] = useState({
     val: null,
     text: "100xxxx",
-    price: null,
+    price: 0,
   });
+
+  const {
+    categories,
+    loading: loadingCategories,
+    error: errorCategories,
+  } = useGetCategoriesByName("pulsa");
 
   const {
     providers,
     loading: loadingProv,
     error: errorProv,
-  } = useGetProvider(state);
+  } = useGetProvider(categories?.id);
+
   const {
     products,
     loading: loadingProducts,
@@ -50,7 +57,7 @@ export default function CheckoutPulsa() {
     navigate("/payment-1", { state: newData });
   };
 
-  const error = errorProv || errorProducts;
+  const error = errorProv || errorProducts || errorCategories;
 
   return (
     <Layout head={<HeaderSecond />}>
@@ -88,8 +95,15 @@ export default function CheckoutPulsa() {
             containerClassName={"mt-5"}
             onChange={setNominal}
           />
-          {error && <p>{error.message}</p>}
-          {!loadingProv && !loadingProducts && nominal.val !== null ? (
+          {error && (
+            <p className="text-red-500 ml-1 text-sm">
+              {useCapitalize(error.message)}
+            </p>
+          )}
+          {!loadingCategories &&
+          !loadingProv &&
+          !loadingProducts &&
+          nominal.val !== null ? (
             <Button text={"Checkout"} className="mt-10" />
           ) : (
             <Button

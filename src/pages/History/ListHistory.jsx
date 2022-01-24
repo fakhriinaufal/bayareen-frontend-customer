@@ -6,13 +6,14 @@ import HistoryEmpty from "./HistoryEmpty";
 import useGetTransactions from "../../hooks/useGetTransactions";
 import { useSelector } from "react-redux";
 import ReactLoading from "react-loading";
+import useCapitalize from "../../hooks/useCapitalize";
 
-export default function ListHistory(props) {
+export default function ListHistory() {
   const userId = useSelector((state) => state.user.data.id);
   const { convertData, loading, error } = useGetTransactions(userId);
 
   if (error) {
-    return <p>{error} </p>;
+    return <p className="text-red-500">{useCapitalize(error.message)} </p>;
   }
   if (!loading && convertData.length === 0) {
     return <HistoryEmpty />;
@@ -35,7 +36,7 @@ export default function ListHistory(props) {
         ) : (
           <div className="flex flex-col items-center gap-1 mt-5">
             {convertData?.map((item) => (
-              <History key={item.id} data={item} />
+              <History key={item.id} data={item} id={item.id} />
             ))}
           </div>
         )}

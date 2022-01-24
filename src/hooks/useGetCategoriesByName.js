@@ -1,21 +1,25 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 
-export default function useGetCategories() {
+export default function useGetCategoriesByName(string) {
+  const [cookies, setCookies] = useCookies(["token"]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [categories, setCategories] = useState();
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/categories")
+      .get(`http://localhost:8080/categories/name?category=${string}`, {
+        headers: {
+          Authorization: `bearer ${cookies.token}`,
+        },
+      })
       .then((res) => {
-        const convertCategories = res.data.data.map((cat) => {
-          return {
-            text: cat.name,
-            val: cat.id,
-          };
-        });
+        const convertCategories = {
+          id: res.data.data.id,
+          name: res.data.data.name,
+        };
         setCategories(convertCategories);
         setLoading(false);
       })

@@ -9,10 +9,15 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import SwiperCore, { FreeMode } from "swiper";
 import { mockHomeNew } from "../../mockdata";
+import useCapitalize from "../../hooks/useCapitalize";
 
 SwiperCore.use([FreeMode]);
 export default function Home() {
   const { categories, loading, error } = useGetCategories();
+
+  if (error) {
+    return <p className="text-red-500">{useCapitalize(error.message)}</p>;
+  }
 
   return (
     <Layout head={<Header />} nav={<Navbar />}>
@@ -20,7 +25,6 @@ export default function Home() {
         <img src={Banner} alt="banner" className="mt-16 rounded-lg h-36" />
         <div className="mt-6 mb-2 text-dark-green font-bold">Categories</div>
         <div className="bg-light-gray flex flex-wrap rounded-lg items-center p-2">
-          {error && <p>{error.message}</p>}
           {!loading ? (
             categories?.map((item) => <Category key={item.val} data={item} />)
           ) : (

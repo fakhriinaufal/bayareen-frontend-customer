@@ -24,19 +24,26 @@ export const getTransactions = gql`
   }
 `;
 
-export const getPaymentMethod = gql`
-  query MyQuery($_id: bigint!) {
-    payment_methods_by_pk(id: $_id) {
-      id
-      payment_channel
-    }
-  }
-`;
-
 export const getProductByCatId = gql`
   query MyQuery($_eq: bigint!) {
     products(where: { cat_id: { _eq: $_eq } }) {
       id
+    }
+  }
+`;
+
+export const getTransactionsById = gql`
+  query MyQuery($_eq: bigint!) {
+    transactions(
+      where: { deleted_at: { _is_null: true }, _and: { id: { _eq: $_eq } } }
+    ) {
+      product {
+        name
+      }
+      price
+      status
+      created_at
+      invoice_url
     }
   }
 `;

@@ -6,7 +6,7 @@ import { useCookies } from "react-cookie";
 
 export default function useRegisterAccount() {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
   const [cookies, setCookie] = useCookies(["token"]);
 
   const dispatch = useDispatch();
@@ -23,16 +23,16 @@ export default function useRegisterAccount() {
             name: res.data.data.name,
             phone: res.data.data.phone_number,
             email: res.data.data.email,
-            token: res.data.data.token,
           })
         );
-        setCookie("token", res.data.data.token, { path: "/"});
+        setCookie("token", res.data.data.token, { path: "/" });
         setLoading(false);
       })
       .catch((err) => {
         setLoading(false);
-        setError(err);
+        setError(err.response.data);
       });
+    setError("");
   };
   return { loginAccount, loading, error };
 }

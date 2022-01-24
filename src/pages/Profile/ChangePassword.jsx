@@ -7,6 +7,7 @@ import { useState } from "react";
 import useUpdatePassword from "../../hooks/useUpdatePassword";
 import { useSelector } from "react-redux";
 import ReactLoading from "react-loading";
+import useCapitalize from "../../hooks/useCapitalize";
 
 export default function ChangePassword() {
   const [oldPassword, setOldPassword] = useState("");
@@ -82,8 +83,12 @@ export default function ChangePassword() {
           onChange={onChange}
           containerClassName={"mb-4"}
         />
-        {error && <p className="text-sm text-red-500">{error}</p>}
-        {errorUpdate && <p className="text-sm text-red-500">{errorUpdate.message}</p>}
+        {error && <p className="text-sm ml-1 text-red-500">{error}</p>}
+        {errorUpdate && (
+          <p className="text-sm ml-1 text-red-500">
+            {useCapitalize(errorUpdate.message)}
+          </p>
+        )}
         {!loadingUpdate ? (
           <Button text={"Submit"} className="mt-5" />
         ) : (

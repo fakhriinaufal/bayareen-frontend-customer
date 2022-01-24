@@ -15,7 +15,7 @@ import CheckoutAir from "./pages/CheckoutForm/CheckoutAir";
 import DetailHistory from "./pages/History/DetailHistory";
 import Payment1 from "./pages/PaymentForm/PaymentPulsa";
 import Payment2 from "./pages/PaymentForm/PaymentAir";
-import Payment3 from "./pages/PaymentForm/PaymentListrik"
+import Payment3 from "./pages/PaymentForm/PaymentListrik";
 import NotLogin from "./pages/NotLogin/NotLogin";
 import PrivateRoute from "./components/privateRoute/PrivateRoute";
 import PublicRoute from "./components/privateRoute/PublicRoute";
@@ -30,7 +30,6 @@ function App() {
   const [cookies, setCookies] = useCookies(["token"]);
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
-  console.log(cookies.token);
   useEffect(() => {
     if (cookies.token !== null) {
       const instance = axios.create({
@@ -46,8 +45,7 @@ function App() {
               id: res.data.data.id,
               name: res.data.data.name,
               email: res.data.data.email,
-              phone: res.data.data.phone,
-              token: cookies.token,
+              phone: res.data.data.phone_number,
               isLogin: true,
             })
           );
@@ -84,8 +82,8 @@ function App() {
         <Route path="/transaction" element={<PrivateRoute />}>
           <Route path="/transaction" element={<ListHistory />} />
         </Route>
-        <Route path="/transaction-detail" element={<PrivateRoute />}>
-          <Route path="/transaction-detail" element={<DetailHistory />} />
+        <Route path="/transaction/:id" element={<PrivateRoute />}>
+          <Route path="/transaction/:id" element={<DetailHistory />} />
         </Route>
         <Route path="/profile" element={<PrivateRoute />}>
           <Route path="/profile" element={<ProfileMenu />} />

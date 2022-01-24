@@ -3,14 +3,20 @@ import Header from "../../components/Header/HeaderSecond";
 import Navbar from "../../components/Navbar/Navbar";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
-import { useLocation } from "react-router-dom";
+import { useLocation, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import useCreateTransaction from "../../hooks/useCreateTransaction";
 import useGetProductByCatId from "../../hooks/useGetProductByCatId";
 import ReactLoading from "react-loading";
+import useCapitalize from "../../hooks/useCapitalize";
 
 export default function PaymentAir() {
   const { state } = useLocation();
+
+  if (state === null || state === undefined || state === "") {
+    return <Navigate to="/" />;
+  }
+
   const userId = useSelector((state) => state.user.data.id);
 
   const {
@@ -45,6 +51,16 @@ export default function PaymentAir() {
       <form onSubmit={submitHandler}>
         <Input value={state.number} text={"Nomor PDAM"} disabled={true} />
         <Input value={displayPrice} text={"Total Tagihan"} disabled={true} />
+        {errorProduct && (
+          <p className="text-red-500 ml-1 text-sm">
+            {useCapitalize(errorProduct.message)}
+          </p>
+        )}
+        {error && (
+          <p className="text-red-500 ml-1 text-sm">
+            {useCapitalize(error.message)}
+          </p>
+        )}
         {!loadingProduct && !loading ? (
           <Button text={"Pay"} className={"mt-10"} />
         ) : (
@@ -56,8 +72,6 @@ export default function PaymentAir() {
             className="mx-auto mt-10"
           />
         )}
-        {error && <p>{error.message}</p>}
-        {errorProduct && <p>{error}</p>}
       </form>
     </Layout>
   );

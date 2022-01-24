@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import useUpdateProfile from "../../hooks/useUpdateProfile";
 import ReactLoading from "react-loading";
+import useCapitalize from "../../hooks/useCapitalize";
 
 export default function EditProfile() {
   const data = useSelector((state) => state.user.data);
@@ -29,7 +30,7 @@ export default function EditProfile() {
       return;
     }
     if (name === "" || phone === 0 || email === "") {
-      setError("Required field must be filled");
+      setError("Each field must be filled");
       return;
     }
     setError("");
@@ -84,9 +85,11 @@ export default function EditProfile() {
           value={email}
           containerClassName={"mb-4"}
         />
-        {error && <p className="text-sm text-red-500">{error}</p>}
+        {error && <p className="text-sm ml-1 text-red-500">{error}</p>}
         {errorUpdate && (
-          <p className="text-sm text-red-500">{errorUpdate.message}</p>
+          <p className="text-sm ml-1 text-red-500">
+            {useCapitalize(errorUpdate.message)}
+          </p>
         )}
         {!loadingUpdate ? (
           <Button text={"Submit"} className="mt-5" />

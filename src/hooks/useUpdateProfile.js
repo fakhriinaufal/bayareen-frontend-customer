@@ -6,16 +6,20 @@ import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
 export default function () {
+  const [cookies, setCookies] = useCookies(["token"]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [cookies, setCookies] = useCookies(["token"]);
 
   const updateProfile = (object, idx) => {
     setLoading(true);
     axios
-      .patch(`http://localhost:8080/users/${idx}/profile`, object)
+      .patch(`http://localhost:8080/users/${idx}/profile`, object, {
+        headers: {
+          Authorization: `bearer ${cookies.token}`,
+        },
+      })
       .then((res) => {
         dispatch(
           setData({
@@ -23,16 +27,16 @@ export default function () {
             name: res.data.data.name,
             phone: res.data.data.phone_number,
             email: res.data.data.email,
-            token: cookies.token,
           })
         );
         setLoading(false);
         navigate("/profile");
       })
-      .catch((error) => {
+      .catch((err) => {
         setLoading(false);
-        setError(error);
+        setError(err.response.data);
       });
+    setError("");
   };
   return { updateProfile, loading, error };
 }

@@ -18,7 +18,7 @@ export default function Category(props) {
     <div className="flex flex-col items-center text-dark-green text-sm py-2 basis-1/4">
       <div>
         <button
-          onClick={() => navigate(route, { state: props.data.val })}
+          onClick={() => navigate(route)}
           className="flex flex-col items-center"
         >
           <Icon category={name} />

@@ -4,9 +4,10 @@ import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import registerImg from "../../assets/img/register.svg";
 import useRegisterAccount from "../../hooks/useRegisterAccount";
-import {  useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import ReactLoading from "react-loading";
+import useCapitalize from "../../hooks/useCapitalize";
 
 export default function Register() {
   const [err, setErr] = useState("");
@@ -106,8 +107,10 @@ export default function Register() {
             {errors.confirm?.message}
           </span>
         )}
-        {err !== "" && <span className="text-red-500 ml-1 text-sm">{err}</span>}
-        {error && <p className="text-red-500 text-sm">{error.message}</p>}
+        {err !== "" && <p className="text-red-500 ml-1 text-sm">{err}</p>}
+        {error && (
+          <p className="text-red-500 ml-1 text-sm">{useCapitalize(error.message)}</p>
+        )}
         {!loading ? (
           <Button text={"submit"} className="mt-10 mx-auto" />
         ) : (
