@@ -2,28 +2,35 @@ import Layout from "../../components/Layout/Layout";
 import HeaderSecond from "../../components/Header/HeaderSecond";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import useGetPrice from "../../hooks/useGetPrice";
+import useGetCategoriesByName from "../../hooks/useGetCategoriesByName";
 import useCapitalize from "../../hooks/useCapitalize";
 
 export default function CheckoutAir() {
   const navigate = useNavigate();
-  const { state } = useLocation();
-  const catId = state;
+
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm();
-  const { price, loading, error } = useGetPrice();
+
+  const {
+    categories,
+    loading: loadingCategories,
+    error: errorCategories,
+  } = useGetCategoriesByName("pdam");
+
+  const { price, loading: loadingPrice, error: errorPrice } = useGetPrice();
 
   const submitHandler = (data, e) => {
     e.preventDefault();
     const newData = {
       number: data.number,
-      catId: catId,
+      catId: categories?.id,
       price: price,
     };
     navigate("/payment-2", { state: newData });
@@ -31,6 +38,8 @@ export default function CheckoutAir() {
 
   const validateButton =
     watch("number") === undefined || watch("number") === "";
+
+  const error = errorPrice || errorCategories;
 
   return (
     <Layout head={<HeaderSecond />}>
@@ -57,7 +66,7 @@ export default function CheckoutAir() {
               {useCapitalize(error.message)}
             </p>
           )}
-          {!validateButton && !loading ? (
+          {!validateButton && !loadingPrice && !loadingCategories ? (
             <Button text={"Checkout"} className="mt-10" />
           ) : (
             <Button
