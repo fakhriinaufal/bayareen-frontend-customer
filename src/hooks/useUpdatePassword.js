@@ -1,8 +1,10 @@
 import axios from "axios";
 import { useState } from "react";
+import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 
 export default function useUpdatePassword() {
+  const [cookies, setCookies] = useCookies(["cookies"]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -10,7 +12,11 @@ export default function useUpdatePassword() {
   const updatePassword = (object, idx) => {
     setLoading(true);
     axios
-      .patch(`http://localhost:8080/users/${idx}/password`, object)
+      .patch(`http://localhost:8080/users/${idx}/password`, object, {
+        headers: {
+          Authorization: `bearer ${cookies.token}`,
+        },
+      })
       .then(() => {
         setLoading(false);
         navigate("/profile");
