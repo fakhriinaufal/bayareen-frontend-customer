@@ -34,7 +34,6 @@ export default function PaymentPulsa() {
     createTransaction(object);
   };
   if (url !== "") {
-    console.log("test");
     window.location.replace(url);
   }
   
