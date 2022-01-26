@@ -32,6 +32,5 @@ export default function useGetTransactionsById(idx) {
     convertData.created_at = momentObj.format("lll");
   }
 
-  console.log(convertData, "cnvrt");
   return { convertData, loading, error };
 }
