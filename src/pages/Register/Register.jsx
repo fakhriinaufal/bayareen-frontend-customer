@@ -17,6 +17,8 @@ export default function Register() {
     formState: { errors },
   } = useForm();
 
+  const regexPhone = /^(\+62|62|0)8[1-9][0-9]{6,9}$/;
+
   const { registerAccount, loading, error } = useRegisterAccount();
 
   const submitHandler = (data) => {
@@ -62,11 +64,13 @@ export default function Register() {
           register={register}
           required
           requiredMsg={"Phone number can't be empty"}
+          regex={regexPhone}
         />
         {errors.phone?.type === "required" && (
-          <span className="text-red-500 ml-1 text-sm">
-            {errors.phone?.message}
-          </span>
+          <p className="text-red-500 ml-1 text-sm">{errors.phone?.message}</p>
+        )}
+        {errors.phone?.type === "pattern" && (
+          <p className="text-red-500 ml-1 text-sm">Format number isn't valid</p>
         )}
         <Input
           name={"email"}
@@ -109,7 +113,9 @@ export default function Register() {
         )}
         {err !== "" && <p className="text-red-500 ml-1 text-sm">{err}</p>}
         {error && (
-          <p className="text-red-500 ml-1 text-sm">{useCapitalize(error.message)}</p>
+          <p className="text-red-500 ml-1 text-sm">
+            {useCapitalize(error.message)}
+          </p>
         )}
         {!loading ? (
           <Button text={"submit"} className="mt-10 mx-auto" />
