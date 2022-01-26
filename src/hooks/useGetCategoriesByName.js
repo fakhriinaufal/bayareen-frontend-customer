@@ -10,7 +10,7 @@ export default function useGetCategoriesByName(string) {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/categories/name?category=${string}`, {
+      .get(`https://api.bayareen.my.id/categories/name?category=${string}`, {
         headers: {
           Authorization: `bearer ${cookies.token}`,
         },

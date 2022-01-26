@@ -14,9 +14,8 @@ export default function useRegisterAccount() {
   const loginAccount = (object) => {
     setLoading(true);
     axios
-      .post("http://localhost:8080/users/login", object)
+      .post("https://api.bayareen.my.id/users/login", object)
       .then((res) => {
-        console.log(res);
         dispatch(
           setData({
             id: res.data.data.id,

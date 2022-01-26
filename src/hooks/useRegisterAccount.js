@@ -9,9 +9,8 @@ export default function useRegisterAccount() {
 
   const registerAccount = (object) => {
     setLoading(true);
-    console.log(object, "obj regiser");
     axios
-      .post("http://localhost:8080/users", object)
+      .post("https://api.bayareen.my.id/users", object)
       .then(() => {
         setLoading(false);
         navigate("/login");

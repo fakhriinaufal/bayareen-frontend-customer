@@ -12,7 +12,7 @@ export default function useUpdatePassword() {
   const updatePassword = (object, idx) => {
     setLoading(true);
     axios
-      .patch(`http://localhost:8080/users/${idx}/password`, object, {
+      .patch(`https://api.bayareen.my.id/users/${idx}/password`, object, {
         headers: {
           Authorization: `bearer ${cookies.token}`,
         },

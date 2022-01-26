@@ -11,7 +11,7 @@ export default function useCreateTransaction() {
   const createTransaction = (object) => {
     setLoading(true);
     axios
-      .post("http://localhost:8080/transactions", object, {
+      .post("https://api.bayareen.my.id/transactions", object, {
         headers: {
           Authorization: `bearer ${cookies.token}`,
         },

@@ -8,7 +8,7 @@ export default function useGetCategories() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/categories")
+      .get("https://api.bayareen.my.id/categories")
       .then((res) => {
         const convertCategories = res.data.data.map((cat) => {
           return {

@@ -8,7 +8,7 @@ export default function useGetProducts(idx) {
   const [error, setError] = useState(false);
   const [products, setProducts] = useState([]);
 
-  let url = `http://localhost:8080/products?providerId=${idx}`;
+  let url = `https://api.bayareen.my.id/products?providerId=${idx}`;
 
   useEffect(() => {
     if (idx === null) {
