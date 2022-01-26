@@ -15,7 +15,7 @@ export default function ProfileMenu({ onClick }) {
   const [cookies, setCookie, removeCookie] = useCookies(["token"]);
   const clickHandler = () => {
     removeCookie("token");
-    window.location.replace("http://localhost:3000");
+    window.location.replace("https://bayareen.my.id/");
   };
   return (
     <Layout head={<Header />} nav={<Navbar />}>
