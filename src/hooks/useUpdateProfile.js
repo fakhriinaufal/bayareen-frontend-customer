@@ -15,7 +15,7 @@ export default function () {
   const updateProfile = (object, idx) => {
     setLoading(true);
     axios
-      .patch(`http://localhost:8080/users/${idx}/profile`, object, {
+      .patch(`https://api.bayareen.my.id/users/${idx}/profile`, object, {
         headers: {
           Authorization: `bearer ${cookies.token}`,
         },

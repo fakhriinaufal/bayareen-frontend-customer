@@ -19,6 +19,8 @@ export default function CheckoutPulsa() {
     formState: { errors },
   } = useForm();
 
+  const regexPhone = /^(\+62|62|0)8[1-9][0-9]{6,9}$/;
+
   const [provider, setProvider] = useState({
     val: null,
     text: "cari provider",
@@ -73,11 +75,17 @@ export default function CheckoutPulsa() {
             register={register}
             required
             requiredMsg={"Number must be filled"}
+            regex={regexPhone}
           />
           {errors.number?.type === "required" && (
-            <span className="text-red-500 ml-1 text-sm">
+            <p className="text-red-500 ml-1 text-sm">
               {errors.number?.message}
-            </span>
+            </p>
+          )}
+          {errors.number?.type === "pattern" && (
+            <p className="text-red-500 ml-1 text-sm">
+              Format number isn't valid
+            </p>
           )}
           <Dropdown
             text={"Provider Pulsa"}

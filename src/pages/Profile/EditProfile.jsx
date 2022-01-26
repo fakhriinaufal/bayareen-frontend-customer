@@ -17,6 +17,8 @@ export default function EditProfile() {
   const [email, setEmail] = useState(data.email);
   const [error, setError] = useState("");
 
+  const regexPhone = /^(\+62|62|0)8[1-9][0-9]{6,9}$/;
+
   const {
     updateProfile,
     loading: loadingUpdate,
@@ -33,6 +35,11 @@ export default function EditProfile() {
       setError("Each field must be filled");
       return;
     }
+    if (!regexPhone.test(phone)) {
+      setError("Format number isn't valid");
+      return;
+    }
+
     setError("");
     updateProfile(
       {

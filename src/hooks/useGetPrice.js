@@ -10,7 +10,7 @@ export default function useGetPrice() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/products/price", {
+      .get("https://api.bayareen.my.id/products/price", {
         headers: {
           Authorization: `bearer ${cookies.token}`,
         },
