@@ -33,7 +33,7 @@ function App() {
   useEffect(() => {
     if (cookies.token !== null) {
       const instance = axios.create({
-        baseURL: "http://localhost:8080/users/auth",
+        baseURL: "https://api.bayareen.my.id/users/auth",
         timeout: 1000,
         headers: { Authorization: `bearer ${cookies.token}` },
       });
