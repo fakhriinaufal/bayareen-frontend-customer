@@ -10,6 +10,7 @@ export default function Input({
   register,
   required,
   requiredMsg,
+  regex,
   containerClassName,
   labelClassName,
   inputClassName,
@@ -31,7 +32,7 @@ export default function Input({
           onChange={onChange}
           disabled={disabled}
           className={`bg-light-gray text-dark-green p-2 rounded-md focus:outline-dark-green ${inputClassName}`}
-          {...register(name, { required: requiredMsg })}
+          {...register(name, { required: requiredMsg,  pattern: regex })}
         />
       ) : (
         <input
