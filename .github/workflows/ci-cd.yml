@@ -45,6 +45,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
+            docker container stop bayareen-frontend-customer 
             docker container rm bayareen-frontend-customer
             docker image rm fakhriinaufal/bayareen-frontend-customer:latest
             docker pull fakhriinaufal/bayareen-frontend-customer:latest
